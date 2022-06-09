@@ -76,8 +76,8 @@ export namespace skarbsend {
     }
     export interface Provider {
         merchants(): Promise<ResponseMerchants>;
-        send(params:Request): Promise<ResponseSend>;
-        status(id: string): Promise<ResponseStatus>;
+        send(params:SendRequest): Promise<ResponseSend>;
+        status(id: string, year?: number|Date): Promise<ResponseStatus>;
     }
 }
 export class SkarbsendError extends Error {
