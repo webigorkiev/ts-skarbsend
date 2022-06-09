@@ -29,7 +29,7 @@ export namespace skarbsend {
     export interface Sms extends NotificationBase  {
         from?: string // Альфа имя
     }
-    export interface SendRequest {
+    export interface RequestSend {
         sandbox?:boolean,
         merchant?: string,
         from?: string,
@@ -76,7 +76,7 @@ export namespace skarbsend {
     }
     export interface Provider {
         merchants(): Promise<ResponseMerchants>;
-        send(params:SendRequest): Promise<ResponseSend>;
+        send(params:RequestSend): Promise<ResponseSend>;
         status(id: string, year?: number|Date): Promise<ResponseStatus>;
     }
 }
@@ -103,7 +103,7 @@ class Skarbsend {
         return body.data?.rows || [];
     }
 
-    public async send(params:skarbsend.SendRequest): Promise<skarbsend.ResponseSend> {
+    public async send(params:skarbsend.RequestSend): Promise<skarbsend.ResponseSend> {
         const {body} = await this.fetch(
             `${this.opts.entry}/send`,
             "post",
