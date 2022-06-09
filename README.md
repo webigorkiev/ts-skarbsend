@@ -21,13 +21,13 @@ yarn add ts-skarbsend
 import {skarbsend} from "ts-skarbsend";
 
 const provider = skarbsend({
-    token: "Basic auth password",
+    token: "<token>",
     from: "Aplpha name" // less 11 symbol latin or number
 })
 
 const {id}  = await provider.send({
-    to: "<phone>",
-    message: "sms text"
+    phone: "<phone>",
+    text: "sms text"
 });
 ```
 
