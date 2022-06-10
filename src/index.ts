@@ -41,12 +41,34 @@ export namespace skarbsend {
         title?:string,
         detaild?:string,
 
+        delay?: number, // Задержка отправки max 3600 сек
+
         callback?: string,
         email?: boolean, // Дополнительно отправить на email если он есть
 
         push?: Push,
         viber?: Viber,
         sms?: Sms
+    }
+    export interface RequestSendBatch {
+        sandbox?:boolean,
+        merchant?: string,
+        from?: string,
+        email?:boolean, // Get urlEncoded - stage 2
+        start?: string,
+        delay?: number, // Задержка до 2 дней
+        channels?: channels[],
+        callback?: string,
+        rows: {
+            phone: string,
+            text: string,
+            title?: string,
+            detaild?: string,
+
+            push?: Push,
+            viber?: Viber,
+            sms?: Sms
+        }[]
     }
     export interface ResponseSend {
         id: string,
@@ -74,10 +96,22 @@ export namespace skarbsend {
         status: statuses,
         channel: channels
     }
+    export interface ResponseSendBatch {
+        id: string, // uuid of batch // Get
+        rows: {
+            id: string,
+            phone: string
+        }[] // tsv: phone    id
+    }
+    export interface ResponseStatusBatch {
+        rows: ResponseStatus[]
+    }
     export interface Provider {
         merchants(): Promise<ResponseMerchants>;
         send(params:RequestSend): Promise<ResponseSend>;
+        sendBatch(params:RequestSendBatch): Promise<ResponseSendBatch>;
         status(id: string, year?: number|Date): Promise<ResponseStatus>;
+        statusBatch(id: string, year?: number|Date): Promise<ResponseStatusBatch>;
     }
 }
 export class SkarbsendError extends Error {
@@ -115,10 +149,35 @@ class Skarbsend {
         return body.data || {};
     }
 
+    public async sendBatch(params:skarbsend.ResponseSendBatch): Promise<skarbsend.ResponseSendBatch> {
+        const {body} = await this.fetch(
+            `${this.opts.entry}/send-batch`,
+            "post",
+            {
+                from: this.opts.from,
+                ...params
+            }
+        );
+        return body.data || {};
+    }
+
     public async status(id: string, year?: number|Date): Promise<skarbsend.ResponseStatus> {
         year = year instanceof Date ? year.getFullYear() : year;
         const {body} = await this.fetch(
             `${this.opts.entry}/status`,
+            "post",
+            {
+                id,
+                year
+            }
+        );
+        return body.data || {};
+    }
+
+    public async statusBatch(id: string, year?: number|Date): Promise<skarbsend.ResponseStatusBatch> {
+        year = year instanceof Date ? year.getFullYear() : year;
+        const {body} = await this.fetch(
+            `${this.opts.entry}/status-batch`,
             "post",
             {
                 id,
