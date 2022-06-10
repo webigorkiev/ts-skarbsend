@@ -31,7 +31,7 @@ export namespace skarbsend {
     }
     export interface RequestSend {
         sandbox?:boolean,
-        merchant?: string,
+        merchant: string,
         from?: string,
         fromViber?:string,
         phone: string,
@@ -53,7 +53,7 @@ export namespace skarbsend {
     }
     export interface RequestSendBatch {
         sandbox?:boolean,
-        merchant?: string,
+        merchant: string,
         from?: string,
         fromViber?:string,
         // email?:boolean, // Get urlEncoded - stage 2
