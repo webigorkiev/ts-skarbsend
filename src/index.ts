@@ -152,7 +152,7 @@ class Skarbsend {
         return body.data || {};
     }
 
-    public async sendBatch(params:skarbsend.ResponseSendBatch): Promise<skarbsend.ResponseSendBatch> {
+    public async sendBatch(params:skarbsend.RequestSendBatch): Promise<skarbsend.ResponseSendBatch> {
         const {body} = await this.fetch(
             `${this.opts.entry}/send-batch`,
             "post",
