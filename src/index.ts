@@ -1,7 +1,7 @@
 import fetch from "cross-fetch";
 
 export namespace skarbsend {
-    export type statuses = "added" | "enroute" | "accepted" | "delivered" | "undeliverable" | "expired" | "rejected" | "unknown" | "error";
+    export type statuses = "added" | "enroute" | "accepted" | "delivered" | "reded" | "undeliverable" | "expired" | "rejected" | "unknown" | "error";
     export type channels = "push"|"sms"|"viber";
     export interface Options {
         token: string,
@@ -33,6 +33,7 @@ export namespace skarbsend {
         sandbox?:boolean,
         merchant?: string,
         from?: string,
+        fromViber?:string,
         phone: string,
 
         channels?: channels[],
@@ -44,7 +45,7 @@ export namespace skarbsend {
         delay?: number, // Задержка отправки max 3600 сек
 
         callback?: string,
-        email?: boolean, // Дополнительно отправить на email если он есть
+        // email?: boolean, // Дополнительно отправить на email если он есть
 
         push?: Push,
         viber?: Viber,
@@ -54,7 +55,8 @@ export namespace skarbsend {
         sandbox?:boolean,
         merchant?: string,
         from?: string,
-        email?:boolean, // Get urlEncoded - stage 2
+        fromViber?:string,
+        // email?:boolean, // Get urlEncoded - stage 2
         start?: string,
         delay?: number, // Задержка до 2 дней
         channels?: channels[],
@@ -86,6 +88,7 @@ export namespace skarbsend {
      * «enroute» - принято/ожидает отправки,
      * «accepted» - отправлено в сеть
      * «delivered» - доставлено,
+     * «reded» - прочитано,
      * «undeliverable» - доставка невозможна,
      * «expired» - истек срок доставки,
      * «rejected» - отклонено сетью
