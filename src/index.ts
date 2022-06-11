@@ -5,7 +5,9 @@ export namespace skarbsend {
     export type channels = "push"|"sms"|"viber";
     export interface Options {
         token: string,
+        merchant?: string,
         from?: string,
+        fromViber?:string,
         entry?:string
     }
     interface NotificationBase {
@@ -31,7 +33,7 @@ export namespace skarbsend {
     }
     export interface RequestSend {
         sandbox?:boolean,
-        merchant: string,
+        merchant?: string,
         from?: string,
         fromViber?:string,
         phone: string,
@@ -53,7 +55,7 @@ export namespace skarbsend {
     }
     export interface RequestSendBatch {
         sandbox?:boolean,
-        merchant: string,
+        merchant?: string,
         from?: string,
         fromViber?:string,
         // email?:boolean, // Get urlEncoded - stage 2
@@ -145,7 +147,9 @@ class Skarbsend {
             `${this.opts.entry}/send`,
             "post",
             {
+                merchant: this.opts.merchant,
                 from: this.opts.from,
+                fromViber: this.opts.fromViber,
                 ...params
             }
         );
@@ -157,7 +161,9 @@ class Skarbsend {
             `${this.opts.entry}/send-batch`,
             "post",
             {
+                merchant: this.opts.merchant,
                 from: this.opts.from,
+                fromViber: this.opts.fromViber,
                 ...params
             }
         );
