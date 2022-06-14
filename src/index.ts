@@ -1,7 +1,7 @@
 import fetch from "cross-fetch";
 
 export namespace skarbsend {
-    export type statuses = "added" | "enroute" | "accepted" | "delivered" | "reded" | "undeliverable" | "expired" | "rejected" | "unknown" | "error";
+    export type statuses = "added" | "enroute" | "accepted" | "delivered" | "read" | "undeliverable" | "expired" | "rejected" | "unknown" | "error";
     export type channels = "push"|"sms"|"viber";
     export interface Options {
         token: string,
@@ -90,7 +90,7 @@ export namespace skarbsend {
      * «enroute» - принято/ожидает отправки,
      * «accepted» - отправлено в сеть
      * «delivered» - доставлено,
-     * «reded» - прочитано,
+     * «read» - прочитано,
      * «undeliverable» - доставка невозможна,
      * «expired» - истек срок доставки,
      * «rejected» - отклонено сетью
