@@ -42,7 +42,7 @@ export namespace skarbsend {
 
         text: string,
         title?:string,
-        detaild?:string,
+        detailed?:string,
 
         delay?: number, // Задержка отправки max 3600 сек
 
@@ -67,7 +67,7 @@ export namespace skarbsend {
             phone: string,
             text: string,
             title?: string,
-            detaild?: string,
+            detailed?: string,
 
             push?: Push,
             viber?: Viber,
