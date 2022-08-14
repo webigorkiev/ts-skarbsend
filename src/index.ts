@@ -56,6 +56,7 @@ export namespace skarbsend {
     export interface RequestSendBatch {
         sandbox?:boolean,
         merchant?: string,
+        label?:string,
         from?: string,
         fromViber?:string,
         // email?:boolean, // Get urlEncoded - stage 2
@@ -99,7 +100,9 @@ export namespace skarbsend {
      */
     export interface ResponseStatus  {
         status: statuses,
-        channel: channels
+        channel: channels,
+        phone: string,
+        id: string
     }
     export interface ResponseSendBatch {
         id: string, // uuid of batch // Get
@@ -109,6 +112,11 @@ export namespace skarbsend {
         }[] // tsv: phone    id
     }
     export interface ResponseStatusBatch {
+        id: string,
+        length: number,
+        label: string,
+        start: string,
+        added: string,
         rows: ResponseStatus[]
     }
     export interface Provider {

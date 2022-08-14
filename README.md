@@ -13,7 +13,7 @@ https://webigorkiev.github.io/ts-skarbsend/
 yarn add ts-skarbsend
 ```
 
-## Usage
+## Notification
 
 ### Send notification
 
@@ -36,6 +36,35 @@ const {id}  = await provider.send({
 ```typescript
 const {status} = await provider.status({
     id:"sms id"
+});
+
+```
+
+## Send batch notification
+
+### Send batch
+
+```typescript
+import {skarbsend} from "ts-skarbsend";
+
+const provider = skarbsend({
+    token: "<token>",
+    from: "Aplpha name" // less 11 symbol latin or number
+})
+
+const {id}  = await provider.sendBatch({
+    rows: [{
+        phone: string,
+        text: string
+    }]
+});
+```
+
+### Fetch status notification
+
+```typescript
+const {status} = await provider.statusBatch({
+    id:"batch id"
 });
 
 ```
