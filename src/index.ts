@@ -19,7 +19,7 @@ export namespace skarbsend {
         icon?: string|"up"|"down"|"point"|"key"|"info"|"question"|"discount"|"danger"|"close"|"allmart"|"tehnoskarb"|"goldmart"|"skarb"|"app",
         type?: "actions"|"actions-accent"|"links"|"links-accent",
         response?:string, // Ответ после использования экшинов
-        actions: {
+        actions?: {
             action: string,
             title: string,
             icon: string|"up"|"down"|"point"|"key"|"info"|"question"|"discount"|"danger"|"close"

@@ -1,6 +1,6 @@
 {
   "name": "ts-skarbsend",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Send notifications by skarbsend",
   "main": "index.js",
   "types": "index.d.ts",
