@@ -2,7 +2,7 @@ import fetch from "cross-fetch";
 
 export namespace skarbsend {
     export type statuses = "added" | "enroute" | "accepted" | "delivered" | "read" | "undeliverable" | "expired" | "rejected" | "unknown" | "error";
-    export type channels = "push"|"sms"|"viber";
+    export type channels = "push"|"sms"|"viber"|"vibersms";
     export interface Options {
         token: string,
         merchant?: string,
@@ -31,6 +31,11 @@ export namespace skarbsend {
     export interface Sms extends NotificationBase  {
         from?: string // Альфа имя
     }
+    export interface Vibersms extends NotificationBase  {
+        from?: string, // Альфа имя
+        sms?: string, //
+        vtime?:number// default: 120 // Время ожидания доставки viber
+    }
     export interface RequestSend {
         sandbox?:boolean,
         merchant?: string,
@@ -51,6 +56,7 @@ export namespace skarbsend {
 
         push?: Push,
         viber?: Viber,
+        vibersms?: Vibersms,
         sms?: Sms
     }
     export interface RequestSendBatch {
